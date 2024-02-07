@@ -16,9 +16,12 @@ class Rectangle{
     public: 
      int l;
      int b;
+     void print(){
+        cout<<"i am not constructor"<<endl;
+     }
      Rectangle(){ //default constructor -called when no args passed
-        l=0;
-        b=0;
+        l = 0;
+        b = 0;
      }
     
     Rectangle(int x, int y){ // parameterised constructor - called when args passed 
@@ -43,6 +46,7 @@ int main(){
     // cout<<r1.l<<" "<<r1.b<<endl;
 
     Rectangle* r1 = new Rectangle();  //dynamic allocation to use delete keyword
+    // r1->print();
     cout<<r1->l<<" "<<r1->b<<endl;
     delete r1;
 
