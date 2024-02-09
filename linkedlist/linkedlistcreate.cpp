@@ -77,6 +77,7 @@ void update_at_pos(node* &head, int k, int val){
     }
          cout<<val<<" Updated successfully!!! at pos: "<<k<<endl;
 }
+
 void display(node* head){
     if(head==NULL){
         cout<< "linked list is empty\n";
