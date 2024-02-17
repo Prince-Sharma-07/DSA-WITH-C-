@@ -17,9 +17,9 @@ class node{
 
 }*head,*temp;
 
-void InsertAtBeg(){
+void insertAtBeg(){
     node* newnode = new node();
-    cout<<"Enter your data to insert at beg: "<<endl;
+    cout<<"Enter your data to insert at Beg: "<<endl;
     cin>>newnode->data;
     if(head==NULL){
         head = newnode;
@@ -28,7 +28,7 @@ void InsertAtBeg(){
         newnode->next = head;
         head = newnode;
     }
-    cout<<"A node inserted at beg";
+    cout<<"A node is inserted at Beg!";
 }
 
 void insertAtPos(){
@@ -41,7 +41,7 @@ while(temp!=NULL){
     temp = temp -> next;
 }
     if(pos==1){
-        InsertAtBeg();
+        insertAtBeg();
     }
 
     else if(pos>size || pos<1){
@@ -59,9 +59,8 @@ while(temp!=NULL){
     }
     newnode->next = temp->next;
     temp->next = newnode;
-    cout<<"Node insert at "<<pos<<endl;
+    cout<<"A Node is inserted at "<<pos<<endl;
     }
-
 }
 
 void insertAtEnd(){
@@ -79,13 +78,63 @@ void insertAtEnd(){
     temp->next = newnode;
     temp = newnode;
  }
- cout<<"A node inserted at end";
+ cout<<"A node is inserted at end!";
+}
+
+void deleteAtBeg(){
+    if(head == NULL){
+        cout<<"Linked list is empty"<<endl;
+        return;
+    }
+    else{
+        temp = head;
+        head = head->next;
+    }
+    cout<<temp->data<<" is deleted!"<<endl;
+    delete(temp);
+}
+
+void deleteAtPos(){
+    int current_pos = 1;
+    int pos;
+    if(head == NULL){
+        cout<<"Linked list is empty:"<<endl;
+    }
+    else{
+        cout<<"Enter the position: "<<endl;
+        cin>>pos;
+        temp = head;
+        while(current_pos != pos-1){
+            temp = temp->next;
+        }
+    }
+}
+
+void deleteAtEnd(){
+   if(head == NULL){
+    cout<<"Linked list is empty"<<endl;
+    return;
+   }
+   else if(head->next == NULL){
+    deleteAtBeg();
+    return;
+   }
+   else{
+    temp = head;
+    while(temp->next->next!=NULL){
+        temp = temp->next;
+    }
+    cout<<temp->next->data<<" is deleted"<<endl;
+    delete(temp->next->next);
+    temp->next =NULL;
+   }
 }
 
 void Display(){
     temp = head;
     if(head==NULL){
         cout<<"Linked list is empty!!!"<<endl;
+        return;
     }
     cout<<"Your Linked List is: "<<endl;
     while(temp!=NULL){
@@ -97,12 +146,12 @@ void Display(){
 
 int main(){
    int choice=0;
-   while(choice!=5){
-    cout<<endl<<"Enter your choice"<<endl<<"1.InsertAtBeg"<<endl<<"2.Enter at Position"<<endl<<"3.InsertAtEnd"<<endl<<"4.Display"<<endl<<"5.Exit"<<endl;
+   while(choice!=8){
+    cout<<endl<<"Enter your choice"<<endl<<"1.InsertAtBeg"<<endl<<"2.InsertAtPosition"<<endl<<"3.InsertAtEnd"<<endl<<"4.DeleteAtBeg"<<endl<<"5.DeleteAtPos"<<endl<<"6.DeleteAtEnd"<<endl<<"7.Display"<<endl<<"8.Exit"<<endl;
     cin>>choice;
     switch(choice){
         case 1: {
-            InsertAtBeg();
+            insertAtBeg();
             break;
         }
         case 2: {
@@ -114,10 +163,22 @@ int main(){
             break;
         }
         case 4: {
-            Display();
+            deleteAtBeg();
             break;
         }
         case 5: {
+            deleteAtPos();
+            break;
+        }
+        case 6: {
+            deleteAtEnd();
+            break;
+        }
+        case 7: {
+            Display();
+            break;
+        }
+        case 8: {
             break;
         }
         default : {
