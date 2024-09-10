@@ -71,26 +71,26 @@ using namespace std;
 
 //Multiple inheritance - Multiple parent class
 
-class Parent1{
-    public: 
-    Parent1(){
-    cout<<"From Parent1"<<endl;
-    }
-};
+// class Parent1{
+//     public: 
+//     Parent1(){
+//     cout<<"From Parent1"<<endl;
+//     }
+// };
 
-class Parent2{
-    public:
-    Parent2(){
-    cout<<"From Parent2"<<endl;
-    }
-};
+// class Parent2{
+//     public:
+//     Parent2(){
+//     cout<<"From Parent2"<<endl;
+//     }
+// };
 
-class Child : public Parent1 , public Parent2 {
-    public:
-    Child(){
-    cout<<"From Child"<<endl;
-    }
-};
+// class Child : public Parent1 , public Parent2 {
+//     public:
+//     Child(){
+//     cout<<"From Child"<<endl;
+//     }
+// };
 
 //Hierarchical Inheritance - One parent have multiple child 
 //Hybrid Inheritance - combination of more than 1 inheritance types.
@@ -99,7 +99,38 @@ class Child : public Parent1 , public Parent2 {
 //eg: class A inherits property from class D and class C but class C and D inherits their properties from a class D
 //    so class A get redundant properties on class D multiple times from class A as well as B.
 
+// int main(){
+//     Child c; 
+//    return 0;
+// }
+
+
+class Human{
+    protected:
+    string name;
+    public:
+    Human(){
+    }
+    Human(string name) {
+        this->name = name;
+    }
+    
+};
+class Student : public Human{
+    int roll_no;
+    public:
+    
+    Student(string name , int roll_no): Human(name){   //inline constructor call
+        this->roll_no = roll_no;
+    }
+void display(){
+        cout<<name<<" "<<roll_no;
+    }
+};
 int main(){
-    Child c; 
-   return 0;
+    Human h;
+    Student s("prince",35);
+    s.display();
+
+    
 }

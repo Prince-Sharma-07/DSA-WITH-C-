@@ -11,11 +11,20 @@ class node{
         next = NULL;
     }
 
-    ~node(){
-        cout<<"nodeDeleted";
-    }
+    // ~node(){   
+    //     cout<<"nodeDeleted";
+    // }
 
-}*head,*temp;
+}*head,*temp,*prv,*current;
+
+void insertAtbeg();
+void insertAtpos();
+void insertAtEnd();
+void deleteAtBeg();
+void deleteAtPos();
+void deleteAtEnd();
+void reverse();
+void Display();
 
 void insertAtBeg(){
     node* newnode = new node();
@@ -94,22 +103,6 @@ void deleteAtBeg(){
     delete(temp);
 }
 
-void deleteAtPos(){
-    int current_pos = 1;
-    int pos;
-    if(head == NULL){
-        cout<<"Linked list is empty:"<<endl;
-    }
-    else{
-        cout<<"Enter the position: "<<endl;
-        cin>>pos;
-        temp = head;
-        while(current_pos != pos-1){
-            temp = temp->next;
-        }
-    }
-}
-
 void deleteAtEnd(){
    if(head == NULL){
     cout<<"Linked list is empty"<<endl;
@@ -130,13 +123,73 @@ void deleteAtEnd(){
    }
 }
 
+void deleteAtPos(){
+    int current_pos = 1 , size=0 , pos;
+
+    if(head == NULL){
+        cout<<"Linked list is empty:"<<endl;
+        return;
+    }
+    
+    temp = head;
+    while(temp!=NULL){
+    size++;
+    temp = temp -> next;
+    }
+
+    cout<<"Enter the position: "<<endl;
+    cin>>pos;
+   
+    if(pos>size || pos<1){
+        cout<<"Please Enter the position from 1 to "<<size+1<<endl;
+        return;
+    }
+
+    else if(pos==1){
+        deleteAtBeg();
+        return;
+    }
+
+    else if(pos == size+1) {
+        deleteAtEnd();
+        return;
+    }
+
+    else{
+        temp = head;
+        while(current_pos != pos-1){
+            temp = temp->next;
+            current_pos++;
+        }
+        prv = temp;
+        temp = temp->next;
+        prv->next = temp->next;
+        cout<<temp->data<<" is deleted!"<<endl;
+        delete(temp);
+    }
+}
+
+void reverse(){
+   prv = NULL;
+   current = head;
+   while(current!=NULL){
+    temp = current->next;
+    current->next = prv;
+    prv = current;
+    current = temp;
+   }
+   head = prv;
+   cout<<endl<<"After reversing ";
+   Display();
+}
+
 void Display(){
     temp = head;
     if(head==NULL){
         cout<<"Linked list is empty!!!"<<endl;
         return;
     }
-    cout<<"Your Linked List is: "<<endl;
+    cout<<"Your Linked List is:  ";
     while(temp!=NULL){
         cout<<temp->data<<"->";
         temp=temp->next;
@@ -146,8 +199,8 @@ void Display(){
 
 int main(){
    int choice=0;
-   while(choice!=8){
-    cout<<endl<<"Enter your choice"<<endl<<"1.InsertAtBeg"<<endl<<"2.InsertAtPosition"<<endl<<"3.InsertAtEnd"<<endl<<"4.DeleteAtBeg"<<endl<<"5.DeleteAtPos"<<endl<<"6.DeleteAtEnd"<<endl<<"7.Display"<<endl<<"8.Exit"<<endl;
+   while(choice!=9){
+    cout<<endl<<"Enter your choice: "<<endl<<endl<<"1.InsertAtBeg"<<endl<<"2.InsertAtPosition"<<endl<<"3.InsertAtEnd"<<endl<<"4.DeleteAtBeg"<<endl<<"5.DeleteAtPos"<<endl<<"6.DeleteAtEnd"<<endl<<"7.Reverse"<<endl<<"8.Display"<<endl<<"9.Exit"<<endl;
     cin>>choice;
     switch(choice){
         case 1: {
@@ -174,11 +227,15 @@ int main(){
             deleteAtEnd();
             break;
         }
-        case 7: {
-            Display();
+        case 7:{
+            reverse();
             break;
         }
         case 8: {
+            Display();
+            break;
+        }
+        case 9: {
             break;
         }
         default : {

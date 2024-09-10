@@ -1,51 +1,68 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define MAX 100
-int top = -1;  
-int stack[MAX];
 
-void Push();
-void Pop();
-void Display();
-
-void push(){
+class Stack{
+    int* arr;
+    int size;
+    int top;
+public:
+    Stack(int s){
+        size = s;
+        top = -1;
+        arr = new int[s];
+    }
+void Push(){
+if(top==size-1){
+    cout<<"Stack overflow"<<endl;
+    return; 
+}
+else{
 cout<<"Enter a number: "<<endl;
-if(top == -1){
-    top++;
-}
-cin>>stack[top];
 top++;
+cin>>arr[top];
 }
-
+}
 void Pop(){
-int no = stack[top];
+    if(top==-1){
+        cout<<"Stack Underflow"<<endl;
+        return;
+    }
+    else{
+int no = arr[top];
 top--;
-cout<<no +" is popped"<<endl;
+cout<<no<<" is popped"<<endl;
+    }
 }
 
 void Display(){
-while(top!=0){
-    cout<<stack[top--];
+    int temp = top;
+while(temp!=-1){
+    cout<<arr[temp--]<<" ";
 }
+cout<<endl;
 }
+};
 int main(){
-
+    int n;
+    cout<<"Enter the size of Stack:"<<endl;
+    cin>>n;
+    Stack st(n);
     int choice=0;
   while (choice != 4){
-    cout<<"Select an operation"<<endl<<"1.Push"<<endl<<"2.Pop"<<endl<<"3.Display"<<endl<<"4.Exit";
+    cout<<"Select an operation"<<endl<<"1.Push"<<endl<<"2.Pop"<<endl<<"3.Display"<<endl<<"4.Exit"<<endl;
     cin>>choice;
     switch (choice)
     {
     case 1:{
-        Push();
+        st.Push();
         break;
     }
     case 2:{
-        Pop();
+        st.Pop();
        break;
     }
     case 3:{
-     Display();
+     st.Display();
      break;
     }
     case 4:{
